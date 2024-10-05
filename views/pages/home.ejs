@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home - CAKE CHAT</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <%- include('../partials/navbar') %>
+  <div class="container mt-4">
+    <div class="container">
+      <h1 class="display-4">Welcome to Cake Chat!</h1>
+      <p class="lead">Discover the finest cakes baked with love and passion. Talk to other people about different cakes and their preferences!!</p>
+      <hr class="my-4">
+      <p>Talk to other people of similar cake interests.!!</p>
+      <a class="btn btn-primary btn-lg" href="/cakes" role="button">View Cakes</a>
+    </div>
+    <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="/images/cake1.jpg" class="img-fluid " alt="Cake 1">
+      </div>
+      <div class="col-md-4">
+        <img src="/images/cake2.jpg" class="img-fluid" alt="Cake 2">
+      </div>
+      <div class="col-md-4">
+        <img src="/images/cake3.jpg" class="img-fluid" alt="Cake 3">
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <%- include('../partials/footer') %>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

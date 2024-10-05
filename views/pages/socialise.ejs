@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Users - CAKE CHAT</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .card {
+      margin-bottom: 20px;
+    }
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto;
+      display: block;
+    }
+    .gender-male {
+      color: red;
+    }
+    .gender-female {
+      color: blue;
+    }
+    .gender-other {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <%- include('../partials/navbar') %>
+  <div class="container mt-4">
+    <div class="row">
+      <h1 class="display-4">Our Users</h1>
+      <% users.forEach(user_ => { %>
+        <div class="col-md-4">
+          <div class="card">
+            <img src="<%= user_.profilePic %>" class="profile-pic card-img-top" alt="<%= user.username %>'s profile picture">
+            <div class="card-body text-center">
+              <h5 class="card-title"><%= user_.username %></h5>
+              <p class="card-text"><%= user_.description %></p>
+              <p class="card-text">
+                <% if (user_.gender === 'Male') { %>
+                  <span class="gender-male">Male</span>
+                <% } else if (user_.gender === 'Female') { %>
+                  <span class="gender-female">Female</span>
+                <% } else { %>
+                  <span class="gender-other">Other</span>
+                <% } %>
+              </p>
+              <% if (user_.id !== user.id) { %>
+                <a href="/chat/<%= user_.id %>" class="btn btn-primary">Chat</a>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+  <%- include('../partials/footer') %>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

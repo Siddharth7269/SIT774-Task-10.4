@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cakes</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .heart-button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+    }
+    .gray{
+      color:gray;
+    }
+    .red {
+      color: red;
+    }
+    .heart-button:hover {
+      color: darkred;
+    }
+  </style>
+</head>
+<body>
+  <%- include('../partials/navbar') %>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">All Cakes</h1>
+    <div class="row">
+      <% cakes.forEach(cake => { %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="<%= cake.imageUrl %>" class="card-img-top" alt="<%= cake.name %>">
+            <div class="card-body">
+              <h5 class="card-title"><%= cake.name %></h5>
+              <p class="card-text"><%= cake.description %></p>
+              <p class="card-text"><strong>Price:</strong> $<%= cake.price %></p>
+              <% if (user) { %>
+                <button type="button" class="heart-button <%= likedCakes.includes(cake.id) ? 'red' : 'gray' %>" data-cake-id="<%= cake.id %>">
+                  <i class="fas fa-heart"></i>
+                </button>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+    <% if (!user) { %>
+      <div class="text-center mt-4">
+        <a href="/login" class="btn btn-secondary">Login to add cakes to favorites</a>
+      </div>
+    <% } %>
+  </div>
+  <%- include('../partials/footer') %>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const heartButtons = document.querySelectorAll('.heart-button');
+
+      heartButtons.forEach(button => {
+        button.addEventListener('click', async (event) => {
+          const cakeId = button.getAttribute('data-cake-id');
+          const isLiked = button.classList.contains('red');
+          const url = isLiked ? '/favorite/remove' : '/favorite';
+          
+          try {
+            const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ cakeId })
+            });
+            
+            if (response.ok) {
+              button.classList.toggle('red');
+              button.classList.toggle('gray');
+            } else {
+              console.error('Failed to update favorite status of the cake');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
